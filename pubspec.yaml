@@ -2,8 +2,7 @@ name: audible_mode
 description: A new Flutter project.
 version: 1.0.0
 homepage: https://github.com/andreamainella98/audible_mode
-authors:
-  - Andrea Mainella
+author: Andrea Mainella
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -13,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  enum_to_string: 2.0.1
+  enum_to_string: ^2.0.1
 
 dev_dependencies:
   flutter_test:
