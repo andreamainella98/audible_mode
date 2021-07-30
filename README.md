@@ -5,6 +5,8 @@ This plugin permitted to check a sound mode of device.
 - Native android: [AudioManager]
 - Native ios: [Mute] pod plugin
 
+## PAY ATTENTION
+- In the ios simulator it doesn't work
 
 ## HOW TO INSTALL
 ```yaml
@@ -25,13 +27,13 @@ AudibleProfile audibleProfile = await Audible.getDeviceMode;
 ## SCREENSHOT
 | iOS  |  Android |
 | ------------ | ------------ |
-|  Iphone 12 Pro(iOS 14.7.1) ![ios](https://raw.githubusercontent.com/andreamainella98/audible_mode/master/screenshoot/ios.gif) |  Oneplus-5T(Android 10) ![android](https://raw.githubusercontent.com/andreamainella98/audible_mode/master/screenshoot/android.gif)|
+|  Iphone 12 Pro(iOS 14.7.1)<br> <img src="https://raw.githubusercontent.com/andreamainella98/audible_mode/master/screenshoot/ios.gif" width="300" height="600"/> |  Oneplus-5T(Android 10)<br> <img src="https://raw.githubusercontent.com/andreamainella98/audible_mode/master/screenshoot/android.gif" width="300" height="600"/>|
 
-## FEATURE
-- <input type="checkbox" disabled checked /> Detect sound mode
-- <input type="checkbox" disabled unchecked /> Stream of sound mode
-- <input type="checkbox" disabled unchecked /> Change volume intensity
-- <input type="checkbox" disabled unchecked /> Get actual volume intensity
+## NEXT FEATURE
+- [x] Detect sound mode
+- [ ] Stream of sound mode
+- [ ] Change volume intensity
+- [ ] Get actual volume intensity
 
 
 [Mute]: https://cocoapods.org/pods/Mute "Mute"
