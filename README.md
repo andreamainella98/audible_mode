@@ -1,15 +1,38 @@
-# audible_mode
+# AUDIBLE MODE
 
-A new Flutter project.
+## DESCRIPTION
+This plugin permitted to check a sound mode of device.
+- Native android: [AudioManager]
+- Native ios: [Mute] pod plugin
 
-## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+## HOW TO INSTALL
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  audible_mode: ^1.0.0
+```
+## HOW TO USE
+```dart
+AudibleProfile audibleProfile = await Audible.getDeviceMode;
+//  AudibleProfile:
+//  SILENT_MODE -> iOS/Android,
+//  VIBRATE_MODE -> Android,
+//  NORMAL_MODE -> iOS/Android,
+//  UNDEFINED,
+```
+## SCREENSHOT
+| iOS  |  Android |
+| ------------ | ------------ |
+|  Iphone 12 Pro(iOS 14.7.1) ![](screenshoot/ios.mp4) |  Oneplus-5T(Android 10) ![](screenshoot/android.mp4)|
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## FEATURE
+- <input type="checkbox" disabled checked /> Detect sound mode
+- <input type="checkbox" disabled unchecked /> Stream of sound mode
+- <input type="checkbox" disabled unchecked /> Change volume intensity
+- <input type="checkbox" disabled unchecked /> Get actual volume intensity
 
+
+[Mute]: https://cocoapods.org/pods/Mute "Mute"
+[AudioManager]: https://developer.android.com/reference/android/media/AudioManager "AudioManager"

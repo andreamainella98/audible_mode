@@ -5,7 +5,7 @@ class Audible {
 
   static Future<AudibleProfile?> get getDeviceMode async {
     String temp = await _channel.invokeMethod(_GET_AUDIBLE_MODE);
-    await Future.delayed(Duration(milliseconds: 500)).then((value) async {
+    await Future.delayed(Duration(milliseconds: 250)).then((value) async {
       temp = await _channel.invokeMethod(_GET_AUDIBLE_MODE);
     });
     debugPrint("AUDIBLE MODE: $temp");
