@@ -25,7 +25,7 @@ AudibleProfile audibleProfile = await Audible.getDeviceMode;
 ## SCREENSHOT
 | iOS  |  Android |
 | ------------ | ------------ |
-|  Iphone 12 Pro(iOS 14.7.1) ![](screenshoot/ios.mp4) |  Oneplus-5T(Android 10) ![](screenshoot/android.mp4)|
+|  Iphone 12 Pro(iOS 14.7.1) ![ios](https://raw.githubusercontent.com/andreamainella98/audible_mode/master/screenshoot/ios.gif) |  Oneplus-5T(Android 10) ![android](https://raw.githubusercontent.com/andreamainella98/audible_mode/master/screenshoot/android.gif)|
 
 ## FEATURE
 - <input type="checkbox" disabled checked /> Detect sound mode
