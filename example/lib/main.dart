@@ -1,38 +1,34 @@
-import 'dart:async';
-
 import 'package:audible_mode/audible_mode.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  AudibleProfile _audibleProfile = AudibleProfile.UNDEFINED;
+  double volume = 0.0;
+  double maxVolume = 0.0;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    init();
   }
 
-  Future<void> initPlatformState() async {
-    AudibleProfile audibleProfile;
-    try {
-      audibleProfile = await Audible.getDeviceMode ?? AudibleProfile.UNDEFINED;
-    } on PlatformException {
-      audibleProfile = AudibleProfile.UNDEFINED;
-    }
-    if (!mounted) return;
-    setState(() {
-      _audibleProfile = audibleProfile;
-    });
+  Future<void> init() async {
+    await Audible.getCurrentVolume.then((value) => setState(() {
+          volume = value;
+        }));
+    await Audible.getMaxVolume.then((value) => setState(() {
+          maxVolume = value;
+        }));
   }
 
   @override
@@ -42,50 +38,72 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Audible Mode'),
         ),
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Icon(
-                  _generateIcon(),
-                  size: 50,
-                ),
-              ),
-              Text(
-                _generateText(),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    initPlatformState();
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                StreamBuilder<AudibleProfile?>(
+                  initialData: AudibleProfile.UNDEFINED,
+                  stream: Audible.audibleStream,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        return const CircularProgressIndicator();
+                      case ConnectionState.waiting:
+                      case ConnectionState.active:
+                      case ConnectionState.done:
+                        return Column(
+                          children: [
+                            Icon(
+                              _generateIcon(
+                                  snapshot.data ?? AudibleProfile.UNDEFINED),
+                              size: 60,
+                            ),
+                            Text(
+                              _generateText(
+                                  snapshot.data ?? AudibleProfile.UNDEFINED),
+                              style: const TextStyle(
+                                fontSize: 30,
+                              ),
+                            ),
+                          ],
+                        );
+                    }
                   },
-                  color: Colors.blue,
+                ),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
                   child: Text(
-                    "Check mode",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
+                    "Set volume",
+                    style: TextStyle(fontSize: 30),
                   ),
                 ),
-              )
-            ],
+                Text(
+                  volume.toStringAsFixed(1),
+                  style: const TextStyle(fontSize: 20),
+                ),
+                Slider(
+                  value: volume,
+                  onChanged: (value) => setState(() {
+                    volume = value;
+                  }),
+                  min: 0,
+                  max: maxVolume,
+                  onChangeEnd: (value) => Audible.setVolume(volume),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  String _generateText() {
-    switch (_audibleProfile) {
+  String _generateText(AudibleProfile profile) {
+    switch (profile) {
       case AudibleProfile.SILENT_MODE:
         return "Silent mode";
       case AudibleProfile.VIBRATE_MODE:
@@ -93,12 +111,12 @@ class _MyAppState extends State<MyApp> {
       case AudibleProfile.NORMAL_MODE:
         return "Normal mode";
       case AudibleProfile.UNDEFINED:
-        return "undefinded";
+        return "Undefinded";
     }
   }
 
-  IconData _generateIcon() {
-    switch (_audibleProfile) {
+  IconData _generateIcon(AudibleProfile profile) {
+    switch (profile) {
       case AudibleProfile.SILENT_MODE:
         return Icons.volume_off;
       case AudibleProfile.VIBRATE_MODE:
