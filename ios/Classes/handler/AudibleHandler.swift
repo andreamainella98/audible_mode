@@ -16,11 +16,12 @@ public class AudibleHandler{
     
     init() {
         do {
+            try audioSession.setCategory(.ambient)
             try audioSession.setActive(true)
         } catch {
             print("Error on getting Volume")
         }
-        Mute.shared.checkInterval = 0.5;
+        Mute.shared.checkInterval = 1.0;
     }
     
     func getAudibleProfile() -> String{
