@@ -16,7 +16,7 @@ This plugin use this dependecy:
 dependencies:
   flutter:
     sdk: flutter
-  audible_mode: ^1.0.1
+  audible_mode: ^2.0.0
 ```
 ## HOW TO USE
 
@@ -26,6 +26,13 @@ StreamBuilder<AudibleProfile?>(
   initialData: AudibleProfile.UNDEFINED,
   stream: Audible.audibleStream,
   ...
+```
+### Get stream of volume level
+```dart
+StreamBuilder<double>(
+  initialData: 0.0,
+  stream: Audible.currentVolumeStream,
+...
 ```
 ### Get current audible profile
 ```dart
@@ -49,12 +56,13 @@ Audible.setVolume(0.2)
 
 ## NEXT FEATURE
 
-|      Feature       | Dscription                  |
-|:------------------:|-----------------------------|
-| :white_check_mark: | Detect sound mode           |
-| :white_check_mark: | Stream of AudioProfile      |
-| :white_check_mark: | Change volume intensity     |
-| :white_check_mark: | Get actual volume intensity |
+|      Feature       | Description                  |
+|:------------------:|------------------------------|
+| :white_check_mark: | Detect sound mode            |
+| :white_check_mark: | Stream of AudioProfile       |
+| :white_check_mark: | Change volume intensity      |
+| :white_check_mark: | Get actual volume intensity  |
+| :white_check_mark: | Get volume level when change |
 
 
 Write me in the [GitHub](https://github.com/andreamainella98/audible_mode/issues) issues the new features you need and, if they are approved of course, I will implement them as soon as I can.

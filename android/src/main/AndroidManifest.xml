@@ -1,3 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="it.mainella.audible_mode">
-</manifest>
+<manifest package="it.mainella.audible_mode"></manifest>

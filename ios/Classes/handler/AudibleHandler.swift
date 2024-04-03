@@ -13,14 +13,16 @@ import MediaPlayer
 public class AudibleHandler{
     
     private let audioSession = AVAudioSession.sharedInstance()
+    let volumeView = MPVolumeView()
     
     init() {
         do {
+            try audioSession.setCategory(.ambient)
             try audioSession.setActive(true)
         } catch {
             print("Error on getting Volume")
         }
-        Mute.shared.checkInterval = 0.5;
+        Mute.shared.checkInterval = 1.0;
     }
     
     func getAudibleProfile() -> String{
@@ -42,7 +44,6 @@ public class AudibleHandler{
     
     func setVolume(volume: Float?) -> Void{
         if (volume != nil){
-            let volumeView = MPVolumeView()
             let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {

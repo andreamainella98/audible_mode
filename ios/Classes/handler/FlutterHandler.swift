@@ -11,7 +11,10 @@ import Foundation
 public class FlutterHandler{
     
     private let channel: FlutterMethodChannel
-    private let audibleProfileChannel: FlutterEventChannel
+    private let currentProfileEventChannel: FlutterEventChannel
+    private let currentVolumeEventChannel: FlutterEventChannel
+    
+    private let _currentVolumeHandler: CurrentVolumeStreamHandler
     
     init(binding: FlutterPluginRegistrar) {
         let audibleHandler: AudibleHandler = AudibleHandler();
@@ -20,8 +23,12 @@ public class FlutterHandler{
             name: Constants.METHOD_CHANNEL,
             binaryMessenger: binding.messenger());
         
-        audibleProfileChannel = FlutterEventChannel(
-            name: Constants.EVENT_CHANNEL,
+        currentProfileEventChannel = FlutterEventChannel(
+            name: Constants.CURRENT_PROFILE_EVENT,
+            binaryMessenger: binding.messenger());
+        
+        currentVolumeEventChannel = FlutterEventChannel(
+            name: Constants.CURRENT_VOLUME_EVENT,
             binaryMessenger: binding.messenger());
         
         
@@ -46,12 +53,13 @@ public class FlutterHandler{
                 result("Method not found")
             }
         }
-        
-        audibleProfileChannel.setStreamHandler(AudibleStreamHandler())
+        _currentVolumeHandler = CurrentVolumeStreamHandler(currentVolumeEventChannel)
+        currentProfileEventChannel.setStreamHandler(CurrentProfileStreamHandler())
     }
     
     public func dispose(){
         channel.setMethodCallHandler(nil)
-        audibleProfileChannel.setStreamHandler(nil)
+        currentProfileEventChannel.setStreamHandler(nil)
+        currentVolumeEventChannel.setStreamHandler(nil)
     }
 }

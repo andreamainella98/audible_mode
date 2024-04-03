@@ -7,8 +7,10 @@ import 'package:flutter/services.dart';
 /// various methods within it, without having to declare a special variable.
 class Audible {
   static const MethodChannel _channel = MethodChannel(Constants.METHOD_CHANNEL);
-  static const EventChannel _eventChannel =
-      EventChannel(Constants.EVENT_CHANNEL);
+  static const EventChannel _currentProfileEvent =
+      EventChannel(Constants.CURRENT_PROFILE_EVENT);
+  static const EventChannel _currentVolumeEvent =
+      EventChannel(Constants.CURRENT_VOLUME_EVENT);
 
   /// This method allows you to get the AudibleProfile without having to create a stream
   static Future<AudibleProfile?> get getAudibleProfile async {
@@ -23,13 +25,15 @@ class Audible {
   }
 
   /// This method lets you know the max volume level of the system
+  /// Android -> Android max Volume
+  /// iOS -> 1.0
   static Future<double> get getMaxVolume async {
     double temp = await _channel.invokeMethod(Constants.GET_MAX_VOLUME);
     return double.parse(temp.toStringAsFixed(1));
   }
 
   /// This method allows you to set a value for the system volume
-  /// In Android you can put a value from 0.0 to 15.0
+  /// In Android you can put a value from 0.0 to Android max Volume
   /// In iOS you can put a value from 0.0 to 1.0
   static Future<bool> setVolume(double volume) async {
     return await _channel
@@ -37,9 +41,17 @@ class Audible {
   }
 
   /// This method allows you to have a stream of the system audio profile change
-  static Stream<AudibleProfile?> get audibleStream {
-    return _eventChannel.receiveBroadcastStream().distinct().map(
+  static Stream<AudibleProfile?> get currentProfileStream {
+    return _currentProfileEvent.receiveBroadcastStream().distinct().map(
         (dynamic event) => EnumToString.fromString<AudibleProfile>(
             AudibleProfile.values, event));
+  }
+
+  /// This method allows you to have a stream of the system audio volume level when change
+  static Stream<double> get currentVolumeStream {
+    return _currentVolumeEvent
+        .receiveBroadcastStream()
+        .distinct()
+        .map((dynamic event) => double.parse(event.toString()));
   }
 }

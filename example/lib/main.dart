@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audible_mode/audible_mode.dart';
 import 'package:flutter/material.dart';
 
@@ -6,15 +8,16 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   double volume = 0.0;
   double maxVolume = 0.0;
+  late Stream<double> currentVolume;
 
   @override
   void initState() {
@@ -29,6 +32,12 @@ class _MyAppState extends State<MyApp> {
     await Audible.getMaxVolume.then((value) => setState(() {
           maxVolume = value;
         }));
+
+    Audible.currentVolumeStream.listen((event) {
+      setState(() {
+        volume = event;
+      });
+    });
   }
 
   @override
@@ -46,7 +55,7 @@ class _MyAppState extends State<MyApp> {
               children: [
                 StreamBuilder<AudibleProfile?>(
                   initialData: AudibleProfile.UNDEFINED,
-                  stream: Audible.audibleStream,
+                  stream: Audible.currentProfileStream,
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
@@ -82,7 +91,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 Text(
-                  volume.toStringAsFixed(1),
+                  "${(volume / maxVolume * 100).toInt()}%",
                   style: const TextStyle(fontSize: 20),
                 ),
                 Slider(
