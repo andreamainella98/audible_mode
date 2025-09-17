@@ -7,10 +7,12 @@ import 'package:flutter/services.dart';
 /// various methods within it, without having to declare a special variable.
 class Audible {
   static const MethodChannel _channel = MethodChannel(Constants.METHOD_CHANNEL);
-  static const EventChannel _currentProfileEvent =
-      EventChannel(Constants.CURRENT_PROFILE_EVENT);
-  static const EventChannel _currentVolumeEvent =
-      EventChannel(Constants.CURRENT_VOLUME_EVENT);
+  static const EventChannel _currentProfileEvent = EventChannel(
+    Constants.CURRENT_PROFILE_EVENT,
+  );
+  static const EventChannel _currentVolumeEvent = EventChannel(
+    Constants.CURRENT_VOLUME_EVENT,
+  );
 
   /// This method allows you to get the AudibleProfile without having to create a stream
   static Future<AudibleProfile?> get getAudibleProfile async {
@@ -36,22 +38,23 @@ class Audible {
   /// In Android you can put a value from 0.0 to Android max Volume
   /// In iOS you can put a value from 0.0 to 1.0
   static Future<bool> setVolume(double volume) async {
-    return await _channel
-        .invokeMethod(Constants.SET_VOLUME, {'volume': volume});
+    return await _channel.invokeMethod(Constants.SET_VOLUME, {
+      'volume': volume,
+    });
   }
 
   /// This method allows you to have a stream of the system audio profile change
   static Stream<AudibleProfile?> get currentProfileStream {
     return _currentProfileEvent.receiveBroadcastStream().distinct().map(
-        (dynamic event) => EnumToString.fromString<AudibleProfile>(
-            AudibleProfile.values, event));
+      (dynamic event) =>
+          EnumToString.fromString<AudibleProfile>(AudibleProfile.values, event),
+    );
   }
 
   /// This method allows you to have a stream of the system audio volume level when change
   static Stream<double> get currentVolumeStream {
-    return _currentVolumeEvent
-        .receiveBroadcastStream()
-        .distinct()
-        .map((dynamic event) => double.parse(event.toString()));
+    return _currentVolumeEvent.receiveBroadcastStream().distinct().map(
+      (dynamic event) => double.parse(event.toString()),
+    );
   }
 }

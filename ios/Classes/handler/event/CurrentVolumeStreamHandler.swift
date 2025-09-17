@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import MediaPlayer
+import Flutter
 
 class CurrentVolumeStreamHandler: NSObject, FlutterStreamHandler {
     private let volumeEventChannel: FlutterEventChannel

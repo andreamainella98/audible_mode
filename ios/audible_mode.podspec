@@ -4,10 +4,10 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'audible_mode'
-  s.version          = '2.0.0'
-  s.summary          = 'A new Flutter project.'
+  s.version          = '3.0.0'
+  s.summary          = 'This plugin lets you know when the Android or iOS device changes its audio profile and lets you know some more information about it.'
   s.description      = <<-DESC
-A new Flutter project.
+This plugin lets you know when the Android or iOS device changes its audio profile and lets you know some more information about it.
                        DESC
   s.homepage         = 'https://github.com/andreamainella98/audible_mode'
   s.license          = { :file => '../LICENSE' }
@@ -16,7 +16,7 @@ A new Flutter project.
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'Mute', '~> 0.6.0'
-  s.platform = :ios, '12.0'
+  s.platform = :ios, '13.0'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }

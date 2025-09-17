@@ -8,7 +8,6 @@ import android.media.AudioManager
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.StreamHandler
 
-
 class CurrentVolumeStreamHandler(private var context: Context) : StreamHandler {
     private var audioManager: AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     private lateinit var receiver: BroadcastReceiver
@@ -28,6 +27,6 @@ class CurrentVolumeStreamHandler(private var context: Context) : StreamHandler {
     }
 
     override fun onCancel(arguments: Any?) {
-        context.unregisterReceiver(receiver);
+        context.unregisterReceiver(receiver)
     }
 }

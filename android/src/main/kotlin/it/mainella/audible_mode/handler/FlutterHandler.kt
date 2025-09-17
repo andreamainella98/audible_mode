@@ -7,8 +7,10 @@ import it.mainella.audible_mode.utils.Constants
 
 class FlutterHandler(binding: FlutterPlugin.FlutterPluginBinding) {
     private var channel: MethodChannel = MethodChannel(binding.binaryMessenger, Constants.METHOD_CHANNEL)
-    private var currentProfileEventChannel: EventChannel = EventChannel(binding.binaryMessenger, Constants.CURRENT_PROFILE_EVENT)
-    private var currentVolumeEventChannel: EventChannel = EventChannel(binding.binaryMessenger, Constants.CURRENT_VOLUME_EVENT)
+    private var currentProfileEventChannel: EventChannel =
+        EventChannel(binding.binaryMessenger, Constants.CURRENT_PROFILE_EVENT)
+    private var currentVolumeEventChannel: EventChannel =
+        EventChannel(binding.binaryMessenger, Constants.CURRENT_VOLUME_EVENT)
     private var audibleHandler = AudibleHandler(binding.applicationContext)
 
     init {

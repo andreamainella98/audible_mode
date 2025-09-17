@@ -7,6 +7,7 @@
 
 import Foundation
 import Mute
+import Flutter
 
 public class CurrentProfileStreamHandler: NSObject, FlutterStreamHandler {
     private var _eventSink: FlutterEventSink?

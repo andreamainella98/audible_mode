@@ -1,10 +1,9 @@
 package it.mainella.audible_mode.handler
 
-import AudibleProfile
 import android.content.Context
 import android.content.Context.AUDIO_SERVICE
 import android.media.AudioManager
-
+import it.mainella.audible_mode.utils.AudibleProfile
 
 class AudibleHandler(context: Context) {
     private val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager

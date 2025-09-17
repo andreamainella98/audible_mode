@@ -1,3 +1,7 @@
+## 3.0.0
+* Updated version of Flutter to latest
+* Fixed issue - Request of [@snechiporenko](https://github.com/snechiporenko) with issue [#3](https://github.com/andreamainella98/audible_mode/issues/3)
+* Updated code for iOS 26 and general fix
 ## 2.0.0
 * Add stream of volume level
 * Removed deprecated android build

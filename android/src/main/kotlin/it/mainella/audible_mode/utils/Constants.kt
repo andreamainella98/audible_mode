@@ -1,7 +1,6 @@
 package it.mainella.audible_mode.utils
 
 class Constants {
-
     companion object {
         const val CURRENT_PROFILE_EVENT: String = "CURRENT_PROFILE_EVENT"
         const val CURRENT_VOLUME_EVENT: String = "CURRENT_VOLUME_EVENT"

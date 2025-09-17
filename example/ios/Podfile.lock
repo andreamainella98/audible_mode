@@ -3,11 +3,14 @@ PODS:
     - Flutter
     - Mute (~> 0.6.0)
   - Flutter (1.0.0)
+  - integration_test (0.0.1):
+    - Flutter
   - Mute (0.6.1)
 
 DEPENDENCIES:
   - audible_mode (from `.symlinks/plugins/audible_mode/ios`)
   - Flutter (from `Flutter`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
 
 SPEC REPOS:
   trunk:
@@ -18,12 +21,15 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/audible_mode/ios"
   Flutter:
     :path: Flutter
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
 
 SPEC CHECKSUMS:
-  audible_mode: 55c3c8813098be7a39788d89e82578c1925bef74
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  audible_mode: 54586b77d54e1c3e914f6c6d48ec9fac9fe2880b
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
   Mute: 20135a96076f140cc82bfc8b810e2d6150d8ec7e
 
-PODFILE CHECKSUM: c4c93c5f6502fe2754f48404d3594bf779584011
+PODFILE CHECKSUM: f3734cf2c64ab93db34ebd0461528389a119c1e8
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

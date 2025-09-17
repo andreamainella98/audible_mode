@@ -4,6 +4,7 @@ import 'package:audible_mode/audible_mode.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -26,12 +27,16 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> init() async {
-    await Audible.getCurrentVolume.then((value) => setState(() {
-          volume = value;
-        }));
-    await Audible.getMaxVolume.then((value) => setState(() {
-          maxVolume = value;
-        }));
+    await Audible.getCurrentVolume.then(
+      (value) => setState(() {
+        volume = value;
+      }),
+    );
+    await Audible.getMaxVolume.then(
+      (value) => setState(() {
+        maxVolume = value;
+      }),
+    );
 
     Audible.currentVolumeStream.listen((event) {
       setState(() {
@@ -44,9 +49,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Audible Mode'),
-        ),
+        appBar: AppBar(title: const Text('Audible Mode')),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
@@ -67,15 +70,15 @@ class _MyAppState extends State<MyApp> {
                           children: [
                             Icon(
                               _generateIcon(
-                                  snapshot.data ?? AudibleProfile.UNDEFINED),
+                                snapshot.data ?? AudibleProfile.UNDEFINED,
+                              ),
                               size: 60,
                             ),
                             Text(
                               _generateText(
-                                  snapshot.data ?? AudibleProfile.UNDEFINED),
-                              style: const TextStyle(
-                                fontSize: 30,
+                                snapshot.data ?? AudibleProfile.UNDEFINED,
                               ),
+                              style: const TextStyle(fontSize: 30),
                             ),
                           ],
                         );
@@ -85,24 +88,23 @@ class _MyAppState extends State<MyApp> {
                 const Divider(),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  child: Text(
-                    "Set volume",
-                    style: TextStyle(fontSize: 30),
+                  child: Text("Set volume", style: TextStyle(fontSize: 30)),
+                ),
+                if (volume != 0 && maxVolume != 0) ...{
+                  Text(
+                    "${(volume / maxVolume * 100).toInt()}%",
+                    style: const TextStyle(fontSize: 20),
                   ),
-                ),
-                Text(
-                  "${(volume / maxVolume * 100).toInt()}%",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Slider(
-                  value: volume,
-                  onChanged: (value) => setState(() {
-                    volume = value;
-                  }),
-                  min: 0,
-                  max: maxVolume,
-                  onChangeEnd: (value) => Audible.setVolume(volume),
-                ),
+                  Slider(
+                    value: volume,
+                    onChanged: (value) => setState(() {
+                      volume = value;
+                    }),
+                    min: 0,
+                    max: maxVolume,
+                    onChangeEnd: (value) => Audible.setVolume(volume),
+                  ),
+                },
               ],
             ),
           ),

@@ -7,7 +7,8 @@ import android.content.IntentFilter
 import android.media.AudioManager
 import io.flutter.plugin.common.EventChannel
 
-class CurrentProfileStreamHandler(private var context: Context, private var audibleHandler: AudibleHandler) : EventChannel.StreamHandler {
+class CurrentProfileStreamHandler(private var context: Context, private var audibleHandler: AudibleHandler) :
+    EventChannel.StreamHandler {
     private lateinit var receiver: BroadcastReceiver
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
         receiver = object : BroadcastReceiver() {

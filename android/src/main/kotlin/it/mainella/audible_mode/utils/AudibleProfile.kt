@@ -1,3 +1,5 @@
+package it.mainella.audible_mode.utils
+
 enum class AudibleProfile(val rawValue: String) {
     SILENT_MODE("SILENT_MODE"),
     VIBRATE_MODE("VIBRATE_MODE"),
