@@ -11,12 +11,16 @@ This plugin use this dependecy:
 ## PAY ATTENTION
 - In the ios simulator it doesn't work
 
+## REQUIREMENTS
+- Flutter 3.44 or later (Dart 3.12)
+- On iOS the plugin supports both Swift Package Manager and CocoaPods
+
 ## HOW TO INSTALL
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  audible_mode: ^3.0.0
+  audible_mode: ^4.0.0
 ```
 ## HOW TO USE
 
