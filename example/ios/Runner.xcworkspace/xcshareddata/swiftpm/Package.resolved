@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "mute",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/akramhussein/Mute.git",
+      "state" : {
+        "revision" : "f99f26150c1b4806fb9720642d03159b87fddf40",
+        "version" : "0.6.1"
+      }
+    }
+  ],
+  "version" : 2
+}

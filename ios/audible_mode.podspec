@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'audible_mode'
-  s.version          = '3.0.0'
+  s.version          = '4.0.0'
   s.summary          = 'This plugin lets you know when the Android or iOS device changes its audio profile and lets you know some more information about it.'
   s.description      = <<-DESC
 This plugin lets you know when the Android or iOS device changes its audio profile and lets you know some more information about it.
@@ -13,7 +13,7 @@ This plugin lets you know when the Android or iOS device changes its audio profi
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Andrea Mainella' => 'andrea.mainella@gmail.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'audible_mode/Sources/audible_mode/**/*.swift'
   s.dependency 'Flutter'
   s.dependency 'Mute', '~> 0.6.0'
   s.platform = :ios, '13.0'
